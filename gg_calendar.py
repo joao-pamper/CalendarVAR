@@ -1,15 +1,14 @@
-from __future__ import print_function
 import datetime
 import os.path
+
+from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
-from crawler import Fotmob_web_crawler
+from googleapiclient.errors import HttpError
 
-
-# If modifying these SCOPES, delete the file token.json.
-SCOPES = ['https://www.googleapis.com/auth/calendar.events']
+# If modifying these scopes, delete the file token.json.
+SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
 def authenticate_google_calendar():
     """Shows basic usage of the Google Calendar API."""
@@ -63,9 +62,6 @@ def create_calendar_event(service, match_info):
 # Example usage
 if __name__ == '__main__':
     service = authenticate_google_calendar()
-    url = "https://www.fotmob.com/teams/9781/fixtures/cruzeiro"
-    matches = Fotmob_web_crawler(url)
     
-    for match in matches:
-        create_calendar_event(service, match)
+    create_calendar_event(service, match)
 
