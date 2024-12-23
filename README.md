@@ -26,7 +26,7 @@
 
 ## Installation
 
-1. Clone or download the repository containing `CalendarVAR.py`.
+1. Clone or download the repository containing `main.py`.
 2. Ensure Python is installed on your machine.
 
 ---
@@ -35,4 +35,4 @@
 
 1. Run the script:
    ```bash
-   python CalendarVAR.py
+   python main.py
