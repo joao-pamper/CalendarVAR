@@ -2,6 +2,7 @@
 https://dylanbeattie.net/2021/01/12/adding-events-to-google-calendar-via-a-link.html
 """
 import urllib.parse
+from sender import send_email
 
 BASE_LINK = 'https://calendar.google.com/calendar/u/0/r/eventedit'
 
@@ -114,10 +115,15 @@ def main():
     if params is not None:
         link = BASE_LINK + '?'
         for param in params:
-            if param != params[-1] and param != params[0]:
-                link += '&'
             link += param
+            if param != params[-1]:
+                link += '&'
+    else:
+        link = BASE_LINK
 
+    send = input("Would you like to receive this link through email?\n1. Yes\n2. No\n>")
+    if send == "1":
+        send_email(link)    
     print("Here follows the link to send to your friends!\n\n")
     print(link)
 
