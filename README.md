@@ -40,4 +40,4 @@
 ## Acknowledgments
 
 This project was inspired by [Dylan Beattie’s blog post](https://dylanbeattie.net/2021/01/12/adding-events-to-google-calendar-via-a-link.html).  
-A big thank you for the insightful reference and guidance on creating Google Calendar event links!  
+A big thank you for the insightful reference on creating Google Calendar event links!  
