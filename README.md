@@ -1,43 +1,24 @@
-# CalendarVAR - Add Events to Google Calendar via a Link
+# CalendarVAR - Add Cruzeiro's next games to Google Calendar
 
-**CalendarVAR** is a Python script that allows you to create personalized events and generate Google Calendar links that you can share with others. It enables you to specify event details like summary, date, location, recurrence, and additional information, ensuring seamless event sharing and planning.
+**CalendarVAR** is a Python script that allows you to add the next 5 home and away games of Cruzeiro to google calendar. 
 
----
-
-## Features
-
-- **Interactive Menu:** Simple prompts to select and define event details.
-- **Google Calendar Integration:** Generates a URL to directly add events to Google Calendar.
-- **Customizable Details:**
-  - One-line summary
-  - Start and end dates
-  - Event details
-  - Event location
-  - Recurrence options (e.g., daily, weekly)
+Don't ever miss the next Cruzeiro games by quickly adding the games to your calendar so that you can plan ahead to watch all the games.
 
 ---
 
 ## Requirements
 
 - Python 3.x
-- Internet access to open Google Calendar links
-
----
-
-## Installation
-
-1. Clone or download the repository containing `main.py`.
-2. Ensure Python is installed on your machine.
+- others found in requirements.txt
 
 ---
 
 ## Usage
 
-1. Run the script:
+1. Make sure all games are in the db:
    ```bash
-   python main.py
+   python scrape_games.py
 
-## Acknowledgments
-
-This project was inspired by [Dylan Beattie’s blog post](https://dylanbeattie.net/2021/01/12/adding-events-to-google-calendar-via-a-link.html).  
-A big thank you for the insightful reference and guidance on creating Google Calendar event links!  
+2. Add the games to your google calendar:
+   ```bash
+   python post_to_calendar.py
