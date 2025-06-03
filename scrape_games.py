@@ -64,6 +64,7 @@ def parse_html(html: str):
                         game_content["team2"] = team2
                         game_content["game_date"] = game_date
                         game_content["game_time"] = game_time
+                        game_content["posted"] = False
 
                         content.append(game_content)
     return content
