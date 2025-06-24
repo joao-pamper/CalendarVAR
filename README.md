@@ -9,16 +9,20 @@ Don't ever miss the next Cruzeiro games by quickly adding the games to your cale
 ## Requirements
 
 - Python 3.x
+- MongoDB
 - others found in requirements.txt
 
 ---
 
-## Usage
+## Basic Usage
 
-1. Make sure all games are in the db:
+1. Make sure MongoDB is running on the background.    
+
+2. Activate the web scraper to collect next 5 away and home games from Cruzeiro and add them to the "games" collection, within the "calendarVAR" database by running the following command:    
    ```bash
    python scrape_games.py
-
-2. Add the games to your google calendar:
+   ```
+3. Add the games that haven't been flagged as added to your google calendar by running the following command:
    ```bash
    python post_to_calendar.py
+   ```
