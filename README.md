@@ -14,19 +14,7 @@ Don't ever miss the next Cruzeiro games by quickly adding the games to your cale
 
 ---
 
-## Basic Usage
-
-1. Make sure MongoDB is running on the background.    
-
-2. Activate the web scraper to collect next 5 away and home games from Cruzeiro and add them to the "games" collection, within the "calendarVAR" database by running the following command:    
-   ```bash
-   python scrape_games.py
-   ```
-3. Add the games that haven't been flagged as added to your google calendar by running the following command:
-   ```bash
-   python post_to_calendar.py
-   ```
-
+## Usage
 
 1. Download and activate mongodb Community edition on your machine. Use link below for help.    
 https://www.mongodb.com/docs/manual/administration/install-community/
@@ -66,4 +54,18 @@ https://developers.google.com/workspace/calendar/api/quickstart/python
    python3 main.py
    ```
 
-8. To set up the cron job by using the cronfile run the following
+8. To set up the cron job you must first make the script executable by running the follwoing
+   ```bash
+   chmod +x cron_script.sh
+   ```
+
+   Then create or edit the cronfile by running the following
+   ```bash
+   crontab -e
+   ```
+
+   And add the following lines to the file in the below format
+   ```bash
+   MAILTO='your@email.com'
+   0 8 15 * * /complete/path/to/cron_script.sh
+   ```

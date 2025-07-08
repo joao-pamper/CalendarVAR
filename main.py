@@ -27,11 +27,19 @@ def main():
 
     if len(pa) > 1 and pa[1] == "t":
         test = True
+        print("TESTING")
+        sys.stdout = old_stdout
+        print("TESTING")
         print("Running scripts...")
+
         ScrapeGames(test, games_collection)
         PostToCalendar(test, games_collection)
+
         print("Finished running!")
         print("Test succesfull")
+        sys.stdout = log_file
+        print("Test succesfull")
+
     else:
         test = False
         print("Running scripts...")
