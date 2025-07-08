@@ -11,7 +11,7 @@ CALENDAR_VAR_DB = "calendarVAR"
 
 def main():
     old_stdout = sys.stdout
-    log_file = open("calendarVAR.log","w")
+    log_file = open("calendarVAR.log","a")
     sys.stdout = log_file
     
     print(datetime.datetime.now())

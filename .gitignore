@@ -6,3 +6,4 @@ token.json
 html_body.txt
 venv-calendarVAR
 calendarVAR.log
+cron.log
