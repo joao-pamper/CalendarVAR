@@ -87,94 +87,28 @@ def normalize_teams(team1 : str, team2 : str):
 
     return team1_normalized, team2_normalized
 
-def add_content_to_db(content: list):
-    client = MongoClient("localhost", 27017)
-
-    db = client.calendarVAR
-
-    games = db.games
-
+def add_content_to_db(content: list, games_collection):
+    """
+    Will add all games described in content to the given collection.
+    """
     for game in content:
-        result = games.find_one({"game_date" : game["game_date"]})
+        result = games_collection.find_one({"game_date" : game["game_date"]})
 
         if result is None:
-            games.insert_one(game)
+            print("Adding the following game to the collection", game)
+            games_collection.insert_one(game)
 
-    client.close()
-
-
-if __name__ == "__main__":
-    # request html body from url
+def ScrapeGames(test: bool, games_collection):
+    """
+    Scrapes games off web and adds them to db if not on test mode.
+    """
     html = get_html()
-
-    # investigate html
-    # write_to_file(html)
-
     # get content from html
     content = parse_html(html)
-
-    # add content to mongo
-    add_content_to_db(content)
-
-    # sample_content = [
-    #     {
-    #         "team1": "Cruzeiro",
-    #         "team2": "Palmeiras",
-    #         "game_date": "01/06/2025",
-    #         "game_time": "19:30",
-    #     },
-    #     {
-    #         "team1": "Cruzeiro",
-    #         "team2": "Gremio",
-    #         "game_date": "11/07/2025",
-    #         "game_time": "21:00",
-    #     },
-    #     {
-    #         "team1": "Cruzeiro",
-    #         "team2": "Juventude",
-    #         "game_date": "18/07/2025",
-    #         "game_time": "21:00",
-    #     },
-    #     {
-    #         "team1": "Cruzeiro",
-    #         "team2": "Ceara",
-    #         "game_date": "25/07/2025",
-    #         "game_time": "21:00",
-    #     },
-    #     {
-    #         "team1": "Cruzeiro",
-    #         "team2": "Santos",
-    #         "game_date": "08/08/2025",
-    #         "game_time": "21:00",
-    #     },
-    #     {
-    #         "team1": "Vitoria",
-    #         "team2": "Cruzeiro",
-    #         "game_date": "12/06/2025",
-    #         "game_time": "19:00",
-    #     },
-    #     {
-    #         "team1": "Fluminense",
-    #         "team2": "Cruzeiro",
-    #         "game_date": "15/07/2025",
-    #         "game_time": "21:00",
-    #     },
-    #     {
-    #         "team1": "Corinthians",
-    #         "team2": "Cruzeiro",
-    #         "game_date": "22/07/2025",
-    #         "game_time": "21:00",
-    #     },
-    #     {
-    #         "team1": "Botafogo",
-    #         "team2": "Cruzeiro",
-    #         "game_date": "01/08/2025",
-    #         "game_time": "21:00",
-    #     },
-    #     {
-    #         "team1": "Mirassol",
-    #         "team2": "Cruzeiro",
-    #         "game_date": "15/08/2025",
-    #         "game_time": "21:00",
-    #     },
-    # ]
+    if test:
+        print("The following games were found, but will not be added.")
+        print(content)
+    else:
+        # add content to mongo
+        print("Adding games to database...")
+        add_content_to_db(content, games_collection)

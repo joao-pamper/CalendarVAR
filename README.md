@@ -26,3 +26,44 @@ Don't ever miss the next Cruzeiro games by quickly adding the games to your cale
    ```bash
    python post_to_calendar.py
    ```
+
+
+1. Download and activate mongodb Community edition on your machine. Use link below for help.    
+https://www.mongodb.com/docs/manual/administration/install-community/
+
+2. Start a python venv by running the following command while in the root directory of the folder of this project.
+   ```bash
+   python3 -m venv venv-calendarVAR
+   ```
+
+3. Activate the venv by running the following.
+   ```bash
+   source venv-calendarVAR/bin/activate
+   ```
+
+   Run the following to deactivate the venv if wanted 
+   ```bash
+   deactivate
+   ```
+
+4. Install all required packages by running the following
+   ```bash
+   python3 -m pip install -r requirements.txt
+   ```
+
+5. If you want to connect to your personal google calendar, you will need to take some extra steps to get the credentials.json file, see the link below for more details
+https://developers.google.com/workspace/calendar/api/quickstart/python 
+
+
+6. If you want to first test the scraper, make sure everything is running smoothly and login with google to save your credentials locally run the following
+   ```bash
+   python3 main.py t
+   ```
+
+
+7. To run the script once use the below command 
+   ```bash
+   python3 main.py
+   ```
+
+8. To set up the cron job by using the cronfile run the following

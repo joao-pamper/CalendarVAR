@@ -52,7 +52,7 @@ def get_google_creds():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
-            creds = flow.run_local_server(port=0)
+            creds = flow.run_local_server(port=0, open_browser=False)
         # Save the credentials for the next run
         with open("token.json", "w") as token:
             token.write(creds.to_json())
@@ -64,7 +64,6 @@ def post_games(google_creds, games: list):
     """
     Will post the games to the google calendar.
     """
-    # this is what i need to change
     try:
         service = build("calendar", "v3", credentials=google_creds)
 
@@ -88,15 +87,19 @@ def post_games(google_creds, games: list):
                 'useDefault': True,
             },
             }
+            
             event = service.events().insert(calendarId='primary', body=event).execute()
+            print("Successfully added following event to calendar ", event.get('htmlLink'))
+            print(event)
 
             result = update_posted_status(game)
 
 
     except HttpError as error:
         print(f"An error occurred: {error}")
+        return False
 
-    return
+    return True
 
 def update_posted_status(game:dict):
     """
@@ -139,15 +142,31 @@ def get_game_datetime(game: dict):
     return start_datetime, end_datetime
 
 
-def main():
+def PostToCalendar(test: bool, games_collection):
+    """
+    Will check given collection for games that have not been added yet to the database.
+    Then proceed to attempt to add them to a user with already given credentials or 
+    attempt to login a user.
+    """
+    google_creds = get_google_creds()
+
     games = get_games()
 
     if len(games) < 1:
-        print("ERROR: No games found to be posted")
+        print("No games found to be posted.")
+    else:
 
-    google_creds = get_google_creds()
+        if test:
+            print("These would be the games that would be posted")
+            print(games)
+        else:
+            print("Attempting to post the following games:")
+            print(games)
+            try:
+                post_games(google_creds, games)
+            except:
+                print("Unable to post the games.")
 
-    post_games(google_creds, games)
 
 if __name__ == "__main__":
-    main()
+    PostToCalendar()

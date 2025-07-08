@@ -4,3 +4,5 @@ token.json
 .DS_Store
 .env
 html_body.txt
+venv-calendarVAR
+calendarVAR.log
