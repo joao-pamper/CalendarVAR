@@ -39,19 +39,14 @@ https://www.mongodb.com/docs/manual/administration/install-community/
    python3 -m pip install -r requirements.txt
    ```
 
-5. If you want to connect to your personal google calendar, you will need to take some extra steps to get the credentials.json file, see the link below for more details
-https://developers.google.com/workspace/calendar/api/quickstart/python 
+5. If you want to connect to your personal google calendar, you will need to take some extra steps to get the credentials.json file, see the link below for more details.     
+https://developers.google.com/workspace/calendar/api/quickstart/python
+(Note that if you are using a headless server, you will need to perform the authetication step on another machine to be able to use a browser. Then transfer the token.json to your server to the same directory as this project.)
 
 
-6. If you want to first test the scraper, make sure everything is running smoothly and login with google to save your credentials locally run the following
+7. If you want to first test the scraper, make sure everything is running smoothly and login with google to save your credentials locally run the following
    ```bash
    python3 main.py t
-   ```
-
-
-7. To run the script once use the below command 
-   ```bash
-   python3 main.py
    ```
 
 8. To set up the cron job you must first make the script executable by running the follwoing
@@ -66,6 +61,13 @@ https://developers.google.com/workspace/calendar/api/quickstart/python
 
    And add the following lines to the file in the below format
    ```bash
-   MAILTO='your@email.com'
-   0 8 15 * * /complete/path/to/cron_script.sh
+   0 6 1,16 * * /complete/path/CalendarVAR/cron_script.sh >> /complete/path/CalendarVAR/cron.log 2>&1
+   ```
+   The above line will run cron_script.sh at 6am on the 1st and 16yh of every month. Appending all output to cron.log.
+
+
+
+9. If you just want to run the script, then use the below command 
+   ```bash
+   python3 main.py
    ```
